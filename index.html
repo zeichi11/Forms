@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Test</title>
+  <script src="src/vue.js"></script>
+</head>
+<body>
+  <!-- 엘리먼트 속성 바인딩을 위한 디렉티브(v-bind) 기능 -->
+  <!-- 'active': isActive -> isActive의 값이 true이면 속성의 값은 'active' -->
+  <div id="app" v-bind:class="{ 'active': isActive }" v-bind:title="msg">
+    <!-- 데이터 보간법 -->
+    {{ content }}
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        msg: `이 페이지는 ${new Date()} 에 로드 되었습니다`,
+        content: 'Hello Vue!',
+        isActive: false
+      }
+    })
+  </script>
+  
+  <!-- message의 문자열 여부 조건(v-if)에 따른 렌더링  -->
+  <!-- v-if를 통해 요소 뿐만 아니라 조건에 따라 서로 다른 구조도 렌더링할 수 있다. -->
+  <div id="app" v-if="message">
+    {{ message }} !!
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello World'
+      }
+    })
+  </script>
+
+  <!-- v-for 디렉티브를 통해 요소를 반복적으로 렌더링 할 수 있음 -->
+  <!-- v-for를 통해 반복적으로 생성되는 요소들에는 반드시 key 속성이 있어야 한다.-->
+  <div id="#app">
+    <ol>
+      <li v-for="todo in todos"
+          v-bind:key="{ todo.id }"">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        todos: [
+          { 
+            id: 1,
+            text: 'Vue 배우기' 
+          },
+          { 
+            id: 2,
+            text: 'Vue 프로젝트 만들기' 
+          },
+          { 
+            id: 3,
+            text: '스터디 내용 정리하기' 
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
